@@ -96,9 +96,26 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        # solution involving selection sort
+        while self.can_move_right():
+            # grab the current item
+            self.swap_item()
+            while self.can_move_right():
+                self.move_right()
+                # if we find a smaller item than the one we are holding, swap
+                # this way we get the minimum in O(n) time
+                if self.compare_item() == 1:
+                    self.swap_item()
 
+            # move backward and place the smallest in the spot of the original
+            while self.can_move_left():
+                self.move_left()
+                if self.compare_item() == None:
+                    self.swap_item()
+                    break
+
+            # continue with the position to the right of the one we just iterated over
+            self.move_right()
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
